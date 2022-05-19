@@ -33,7 +33,7 @@ func Handler(writer http.ResponseWriter, request *http.Request) {
 	var user gh.User
 	gh.GetUser(&user, "github")
 
-	for i := 1; i < user.PublicRepos+100; i += 100 {
+	for i := 1; i < (user.PublicRepos/100)+1; i++ {
 		var repos []gh.Repo
 		gh.GetRepos(&repos, "github", i)
 
