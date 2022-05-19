@@ -10,5 +10,6 @@
     { "src": "/bbsmenu.json", "dest": "/examples/5kan/bbsmenu/handler/bbsmenu" },
     { "src": "/.+/subject.txt", "dest": "/examples/5kan/subject/handler/subject"},
     { "src": "/.+/dat/.+.dat", "dest": "/examples/5kan/dathandler/dat"}
-  ]
+  ],
+  "regions": ["hnd1", "sin1"]
 }
