@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "name": "5kan",
+  "builds": [
+    { "src": "/examples/5kan/index/handler/*.go", "use": "@vercel/go" },
+    { "src": "/examples/5kan/bbsmenu/handler/*.go", "use": "@vercel/go" }
+  ],
+  "routes": [
+    { "src": "/", "dest": "/examples/5kan/index/handler/index" },
+    { "src": "/bbsmenu.json", "dest": "/examples/5kan/bbsmenu/handler/bbsmenu" },
+    { "src": "/.+/subject.txt", "dest": "/examples/5kan/subject/handler/subject"},
+    { "src": "/.+/dat/.+.dat", "dest": "/examples/5kan/dathandler/dat"}
+  ]
+}
