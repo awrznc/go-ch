@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"regexp"
+	"time"
 
 	gh "ch/examples/5kan/github"
 	sb "ch/subject"
@@ -23,10 +24,15 @@ func Handler(writer http.ResponseWriter, request *http.Request) {
 		gh.GetIssues(&issues, id, i)
 
 		for _, issue := range issues {
+			datetime, err := time.Parse("2006-01-02T15:04:05Z", issue.CreatedAt)
+			if err != nil {
+				panic(err)
+			}
+
 			subject.Threads = append(
 				subject.Threads,
 				sb.Thread{
-					ThreadKey:     fmt.Sprintf("%v.dat", issue.Number),
+					ThreadKey:     fmt.Sprintf("%v.dat", datetime.Unix()),
 					Title:         issue.Title,
 					ResponseCount: issue.Comments + 1,
 				},
