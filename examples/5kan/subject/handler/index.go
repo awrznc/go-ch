@@ -43,6 +43,6 @@ func Handler(writer http.ResponseWriter, request *http.Request) {
 		}
 	}
 
-	result, _, _ := transform.String(japanese.ShiftJIS.NewDecoder(), sb.Serialize(&subject))
+	result, _, _ := transform.String(japanese.ShiftJIS.NewDecoder(), sb.Serialize(&subject) + "\n")
 	writer.Write([]byte(result))
 }
