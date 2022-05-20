@@ -3,7 +3,9 @@
   "name": "5kan",
   "builds": [
     { "src": "/examples/5kan/index/handler/*.go", "use": "@vercel/go" },
-    { "src": "/examples/5kan/bbsmenu/handler/*.go", "use": "@vercel/go" }
+    { "src": "/examples/5kan/bbsmenu/handler/*.go", "use": "@vercel/go" },
+    { "src": "/examples/5kan/subject/handler/*.go", "use": "@vercel/go" },
+    { "src": "/examples/5kan/dat/handler/*.go", "use": "@vercel/go" }
   ],
   "routes": [
     { "src": "/", "dest": "/examples/5kan/index/handler" },
