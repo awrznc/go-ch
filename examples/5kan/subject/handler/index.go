@@ -6,6 +6,9 @@ import (
 	"regexp"
 	"time"
 
+	"golang.org/x/text/encoding/japanese"
+	"golang.org/x/text/transform"
+
 	gh "ch/examples/5kan/github"
 	sb "ch/subject"
 )
@@ -40,5 +43,6 @@ func Handler(writer http.ResponseWriter, request *http.Request) {
 		}
 	}
 
-	writer.Write([]byte(sb.Serialize(&subject)))
+	result, _, _ := transform.String(japanese.ShiftJIS.NewDecoder(), sb.Serialize(&subject))
+	writer.Write([]byte(result))
 }
