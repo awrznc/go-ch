@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"regexp"
 	"time"
+	"io/ioutil"
+    "strings"
 
 	"golang.org/x/text/encoding/japanese"
 	"golang.org/x/text/transform"
@@ -43,6 +45,17 @@ func Handler(writer http.ResponseWriter, request *http.Request) {
 		}
 	}
 
-	result, _, _ := transform.String(japanese.ShiftJIS.NewDecoder(), `1653054126.dat<>sample (96)` + "\n")
-	writer.Write([]byte(result))
+	sjis := utf8ToSjis("1653063924.dat<>テスト (96)\n")
+
+	writer.Write([]byte(sjis))
+}
+
+func utf8ToSjis(target string) string {
+    stringReader := strings.NewReader(target)
+    transformReader := transform.NewReader(stringReader, japanese.ShiftJIS.NewEncoder())
+    result, err := ioutil.ReadAll(transformReader)
+    if err != nil {
+        panic(err)
+    }
+    return string(result)
 }
