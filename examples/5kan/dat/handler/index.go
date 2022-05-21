@@ -23,9 +23,9 @@ func Replace(target string) string {
 func Handler(writer http.ResponseWriter, request *http.Request) {
 	dat := dt.Dat{Responses: make([]dt.Response, 0)}
 
-	matches := regexp.MustCompile(`^/(.+?)/(.+?).dat$`).FindStringSubmatch(request.URL.Path)
+	matches := regexp.MustCompile(`^/(.+?)/(.+?)/(.+?).dat$`).FindStringSubmatch(request.URL.Path)
 	repoId := matches[1]
-	issueNumber := matches[2]
+	issueNumber := matches[3]
 
 	var issue gh.Issue
 	gh.GetIssue(&issue, repoId, issueNumber)
