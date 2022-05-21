@@ -45,7 +45,7 @@ func Handler(writer http.ResponseWriter, request *http.Request) {
 		}
 	}
 
-	sjis := utf8ToSjis("1653063924.dat<>テスト (96)\n")
+	sjis := utf8ToSjis(sb.Serialize(&subject)+"\n")
 
 	writer.Write([]byte(sjis))
 }
