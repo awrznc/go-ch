@@ -67,5 +67,5 @@ func Replace(target string) string {
 		"\r", "",
 	)
 
-	return " " + htmlEscaper.Replace(target) + " "
+	return htmlEscaper.Replace(target)
 }
