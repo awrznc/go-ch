@@ -49,7 +49,7 @@ func Serialize(subject *Subject) string {
 	result := []string{}
 
 	for _, information := range subject.Threads {
-		line := Replace(information.ThreadKey+`<>`+information.Title+` (`+strconv.FormatUint(information.ResponseCount, 10)+`)`)
+		line := information.ThreadKey+`<>`+Replace(information.Title)+` (`+strconv.FormatUint(information.ResponseCount, 10)+`)`
 		result = append(result, line)
 	}
 
