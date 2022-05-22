@@ -49,8 +49,23 @@ func Serialize(subject *Subject) string {
 	result := []string{}
 
 	for _, information := range subject.Threads {
-		result = append(result, information.ThreadKey+`<>`+information.Title+` (`+strconv.FormatUint(information.ResponseCount, 10)+`)`)
+		line := Replace(information.ThreadKey+`<>`+information.Title+` (`+strconv.FormatUint(information.ResponseCount, 10)+`)`)
+		result = append(result, line)
 	}
 
 	return strings.Join(result, "\n")
+}
+
+func Replace(target string) string {
+	var htmlEscaper = strings.NewReplacer(
+		`&`, "&amp;",
+		`'`, "&apos;",
+		`<`, "&lt;",
+		`>`, "&gt;",
+		`"`, "&quot;",
+		"\n", "<br>",
+		"\r", "",
+	)
+
+	return " " + htmlEscaper.Replace(target) + " "
 }
