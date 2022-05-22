@@ -7,6 +7,8 @@ import (
 	// "time"
 	"io/ioutil"
     "strings"
+	"compress/gzip"
+	"bytes"
 
 	"golang.org/x/text/encoding/japanese"
 	"golang.org/x/text/transform"
@@ -49,7 +51,25 @@ func Handler(writer http.ResponseWriter, request *http.Request) {
 
 	sjis := utf8ToSjis(sb.Serialize(&subject)+"\n")
 
-	writer.Write([]byte(sjis))
+	var result string
+	writer.Header().Set("Content-Type", "text/plain; charset=Shift_JIS")
+	fmt.Println(request.Header)
+	if strings.Contains(request.Header.Get("Accept-Encoding"), "gzip") {
+		result = gzipping(sjis)
+		writer.Header().Set("Content-Encoding", "gzip")
+	} else {
+		result = sjis
+	}
+
+	writer.Write([]byte(result))
+}
+
+func gzipping(target string) string {
+	var buffer bytes.Buffer
+	writer := gzip.NewWriter(&buffer)
+	writer.Write([]byte(target))
+	writer.Close()
+	return string(buffer.Bytes())
 }
 
 func utf8ToSjis(target string) string {
