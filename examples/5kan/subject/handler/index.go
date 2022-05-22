@@ -10,6 +10,7 @@ import (
 
 	"golang.org/x/text/encoding/japanese"
 	"golang.org/x/text/transform"
+	"github.com/rivo/uniseg"
 
 	gh "ch/examples/5kan/github"
 	sb "ch/subject"
@@ -52,7 +53,24 @@ func Handler(writer http.ResponseWriter, request *http.Request) {
 }
 
 func utf8ToSjis(target string) string {
-    stringReader := strings.NewReader(target)
+
+	// get encord target
+	replaceChars := make([]string, 0)
+	gr := uniseg.NewGraphemes(target)
+    for gr.Next() {
+        rs := gr.Runes()
+		for _, emoji := range rs {
+
+			// unless ShiftJIS
+			if emoji >= 0xEA5C {
+				replaceChars = append(replaceChars, string(emoji), fmt.Sprintf("&#%v;", emoji))
+			}
+		}
+    }
+
+	replacedTarget := strings.NewReplacer(replaceChars...).Replace(target)
+
+	stringReader := strings.NewReader(replacedTarget)
     transformReader := transform.NewReader(stringReader, japanese.ShiftJIS.NewEncoder())
     result, err := ioutil.ReadAll(transformReader)
     if err != nil {

@@ -10,14 +10,17 @@ import (
 )
 
 func Replace(target string) string {
-	result := strings.Replace(target, "<", "&lt;", -1)
-	result = strings.Replace(result, ">", "&gt", -1)
-	result = strings.Replace(result, "&", "&amp;", -1)
-	result = strings.Replace(result, `"`, "&quot;", -1)
-	result = strings.Replace(result, "\n", "<br>", -1)
-	result = strings.Replace(result, "\r", "", -1)
+	var htmlEscaper = strings.NewReplacer(
+		`&`, "&amp;",
+		`'`, "&apos;",
+		`<`, "&lt;",
+		`>`, "&gt;",
+		`"`, "&quot;",
+		"\n", "<br>",
+		"\r", "",
+	)
 
-	return " " + result + " "
+	return " " + htmlEscaper.Replace(target) + " "
 }
 
 func Handler(writer http.ResponseWriter, request *http.Request) {
