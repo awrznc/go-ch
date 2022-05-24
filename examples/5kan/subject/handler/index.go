@@ -19,6 +19,7 @@ import (
 )
 
 func Handler(writer http.ResponseWriter, request *http.Request) {
+	panic(fmt.Sprintf("%#v", request))
 	subject := sb.Subject{Threads: make([]sb.Thread, 0)}
 
 	matches := regexp.MustCompile(`^/(.+?)/(subject.txt)$`).FindStringSubmatch(request.URL.Path)
