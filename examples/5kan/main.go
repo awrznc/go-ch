@@ -8,6 +8,7 @@ import (
 	dh "ch/examples/5kan/dat/handler"
 	ih "ch/examples/5kan/index/handler"
 	sh "ch/examples/5kan/subject/handler"
+	nh "ch/examples/5kan/404/handler"
 )
 
 func handler(writer http.ResponseWriter, request *http.Request) {
@@ -24,7 +25,11 @@ func handler(writer http.ResponseWriter, request *http.Request) {
 			dh.Handler(writer, request)
 		}
 	} else {
-		ih.Handler(writer, request)
+		if request.URL.Path == "/" {
+			ih.Handler(writer, request)
+		} else {
+			nh.Handler(writer, request)
+		}
 	}
 }
 

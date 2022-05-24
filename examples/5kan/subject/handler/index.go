@@ -19,7 +19,6 @@ import (
 )
 
 func Handler(writer http.ResponseWriter, request *http.Request) {
-	panic(fmt.Sprintf("%#v", request))
 	subject := sb.Subject{Threads: make([]sb.Thread, 0)}
 
 	matches := regexp.MustCompile(`^/(.+?)/(subject.txt)$`).FindStringSubmatch(request.URL.Path)
@@ -54,7 +53,7 @@ func Handler(writer http.ResponseWriter, request *http.Request) {
 
 	var result string
 	writer.Header().Set("Content-Type", "text/plain; charset=Shift_JIS")
-	fmt.Println(request.Header)
+
 	if strings.Contains(request.Header.Get("Accept-Encoding"), "gzip") {
 		result = gzipping(sjis)
 		writer.Header().Set("Content-Encoding", "gzip")
