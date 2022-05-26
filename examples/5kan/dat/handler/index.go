@@ -55,7 +55,6 @@ func Handler(writer http.ResponseWriter, request *http.Request) {
 	datId := matches[3]
 
 	issueNumber := getIssueNumber(repoId, datId)
-	fmt.Println(issueNumber)
 
 	var issue gh.Issue
 	gh.GetIssue(&issue, repoId, issueNumber)
