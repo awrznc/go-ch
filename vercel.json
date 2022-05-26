@@ -5,6 +5,7 @@
     { "src": "/examples/5kan/index/handler/*.go", "use": "@vercel/go" },
     { "src": "/examples/5kan/bbsmenu/handler/*.go", "use": "@vercel/go" },
     { "src": "/examples/5kan/subject/handler/*.go", "use": "@vercel/go" },
+    { "src": "/examples/5kan/head/handler/*.go", "use": "@vercel/go" },
     { "src": "/examples/5kan/dat/handler/*.go", "use": "@vercel/go" },
     { "src": "/examples/5kan/404/handler/*.go", "use": "@vercel/go" }
   ],
@@ -12,6 +13,7 @@
     { "src": "/", "dest": "/examples/5kan/index/handler" },
     { "src": "/bbsmenu.json", "dest": "/examples/5kan/bbsmenu/handler" },
     { "src": "/.+/subject.txt", "dest": "/examples/5kan/subject/handler"},
+    { "src": "/.+/head.txt", "dest": "/examples/5kan/head/handler"},
     { "src": "/.+/dat/.+.dat", "dest": "/examples/5kan/dat/handler"},
     { "src": "/(.*)", "status": 404, "dest": "/examples/5kan/404/handler" }
   ],
