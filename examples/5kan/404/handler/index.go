@@ -6,7 +6,7 @@ import (
 )
 
 func Handler(writer http.ResponseWriter, request *http.Request) {
-	panic(fmt.Sprintf("%#v", request))
+	// panic(fmt.Sprintf("%#v", request))
 
 	writer.Write([]byte("not found."))
 }
