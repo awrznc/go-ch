@@ -1,12 +1,12 @@
 package handler
 
 import (
-	// "fmt"
+	"fmt"
 	"net/http"
 )
 
 func Handler(writer http.ResponseWriter, request *http.Request) {
-	// panic(fmt.Sprintf("%#v", request))
+	fmt.Printf("%#v", request)
 
 	writer.Write([]byte("not found."))
 }
