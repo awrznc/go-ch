@@ -15,7 +15,8 @@
     { "src": "/.+/subject.txt", "dest": "/examples/5kan/subject/handler"},
     { "src": "/.+/head.txt", "dest": "/examples/5kan/head/handler"},
     { "src": "/.+/dat/.+.dat", "dest": "/examples/5kan/dat/handler"},
-    { "src": "/(.*)", "status": 404, "dest": "/examples/5kan/404/handler" }
+    { "src": "/(.*)", "status": 404, "dest": "/examples/5kan/404/handler" },
+    { "src": "/favicon.ico", "dest": "/examples/5kan/favicon.ico" }
   ],
   "regions": ["hnd1"]
 }
